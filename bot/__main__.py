@@ -15,7 +15,6 @@ from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_tim
 from .helper.telegram_helper.filters import CustomFilters
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch
 
-
 @run_async
 def stats(update, context):
     currentTime = get_readable_time((time.time() - botStartTime))
@@ -23,14 +22,20 @@ def stats(update, context):
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
+    sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
+    recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
-    stats = f'Bot Uptime: {currentTime}\n' \
-            f'Total disk space: {total}\n' \
-            f'Used: {used}\n' \
-            f'Free: {free}\n' \
-            f'CPU: {cpuUsage}%\n' \
-            f'RAM: {memory}%'
+    disk = psutil.disk_usage('/').percent
+    stats = f'<b>⦿ Bᴏᴛ Uᴘᴛɪᴍᴇ:</b> {currentTime}\n' \
+            f'<b>⦿ Tᴏᴛᴀʟ Dɪsᴋ Sᴘᴀᴄᴇ:</b> {total}\n' \
+            f'<b>⦿ Usᴇᴅ:</b> {used}  ' \
+            f'<b>Free:</b> {free}\n\n' \
+            f' \n<b>📊⁍Dᴀᴛᴀ Usᴀɢᴇ⁌📊</b>\n<b>⦿Uᴘʟᴏᴀᴅ:</b> {sent}\n' \
+            f'<b>⦿ Dᴏᴡɴ:</b> {recv}\n\n' \
+            f'<b>⦿ CPU:</b> {cpuUsage}% ' \
+            f'<b>⦿ RAM:</b> {memory}% ' \
+            f'<b>⦿ Dɪsᴋ:</b> {disk}%'
     sendMessage(stats, context.bot, update)
 
 
