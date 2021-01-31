@@ -16,7 +16,7 @@ from .helper.telegram_helper.filters import CustomFilters
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete
 
 
-@run_async
+run_async
 def stats(update, context):
     currentTime = get_readable_time((time.time() - botStartTime))
     total, used, free = shutil.disk_usage('.')
