@@ -13,7 +13,8 @@ from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete
+
 
 @run_async
 def stats(update, context):
@@ -46,7 +47,6 @@ This is a bot which can mirror all your links to Google drive!
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     sendMessage(start_string, context.bot, update)
-
 
 
 @run_async
@@ -83,7 +83,7 @@ def bot_help(update, context):
 
 /{BotCommands.TarMirrorCommand} [download_url][magnet_link]: start mirroring and upload the archived (.tar) version of the download
 
-/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help.
+/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl 
 
 /{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
 
